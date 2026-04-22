@@ -1,2 +1,0 @@
-MOVE32_@@TYPE@@(-1, @@RESULT@@)
-MUL@@TYPE@@(@@OPERAND@@, @@RESULT@@, @@RESULT@@)

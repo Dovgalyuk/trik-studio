@@ -14,7 +14,6 @@
 
 #include "spikeGeneratorBase/spikeMasterGeneratorBase.h"
 #include "spikeGeneratorCustomizer.h"
-#include "spikeGeneratorBase/parts/spikeMailboxes.h"
 
 using namespace spike;
 
@@ -24,26 +23,14 @@ SpikeMasterGeneratorBase::SpikeMasterGeneratorBase(const qrRepo::RepoApi &repo
 		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
 		, qrtext::LanguageToolboxInterface &textLanguage
 		, const qReal::Id &diagramId
-		, const QString &generatorName)
+		, const QStringList &pathsToTemplates)
 	: MasterGeneratorBase(repo, errorReporter, robotModelManager, textLanguage, parserErrorReporter, diagramId)
-	, mGeneratorName(generatorName)
+	, mPathsToTemplates(pathsToTemplates)
 {
 }
 
 generatorBase::GeneratorCustomizer *SpikeMasterGeneratorBase::createCustomizer()
 {
-	return new SpikeGeneratorCustomizer(mRepo, mErrorReporter, mRobotModelManager, *createLuaProcessor(),
-			mGeneratorName, supportsSwitchUnstableToBreaks());
-}
-
-void SpikeMasterGeneratorBase::beforeGeneration()
-{
-	static_cast<SpikeGeneratorFactory *>(mCustomizer->factory())->mailboxes().reinit();
-}
-
-void SpikeMasterGeneratorBase::processGeneratedCode(QString &code)
-{
-	parts::Mailboxes &localMailboxes = static_cast<SpikeGeneratorFactory *>(mCustomizer->factory())->mailboxes();
-	code.replace("@@MAILBOXES_OPENING@@", localMailboxes.generateOpening());
-	code.replace("@@MAILBOXES_CLOSING@@", localMailboxes.generateClosing());
+	return new SpikeGeneratorCustomizer(mRepo, mErrorReporter
+			, mRobotModelManager, *createLuaProcessor(), mPathsToTemplates, supportsSwitchUnstableToBreaks());
 }

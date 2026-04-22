@@ -1,1 +1,0 @@
-/* Arbitrary sensors getter is not supported */

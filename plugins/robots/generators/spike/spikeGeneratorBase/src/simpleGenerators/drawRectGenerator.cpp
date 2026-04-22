@@ -22,21 +22,22 @@ DrawRectGenerator::DrawRectGenerator(const qrRepo::RepoApi &repo
 		, generatorBase::GeneratorCustomizer &customizer
 		, const qReal::Id &id
 		, QObject *parent)
-	: BindingGenerator(repo, customizer, id, (repo.stringProperty(id, "Filled") == "true")
-					? "drawing/drawFilledRect.t"
-					: "drawing/drawRect.t"
+	: BindingGenerator(repo, customizer, id, "drawing/drawRect.t"
 			, {
-				Binding::createConverting("@@XCoordinateRect@@", "XCoordinateRect"
-						, customizer.factory()->intPropertyConverter(id, "XCoordinateRect"))
-				, Binding::createConverting("@@YCoordinateRect@@", "YCoordinateRect"
-						, customizer.factory()->intPropertyConverter(id, "YCoordinateRect"))
-				, Binding::createConverting("@@WidthRect@@", "WidthRect"
-						, customizer.factory()->intPropertyConverter(id, "WidthRect"))
-				, Binding::createConverting("@@HeightRect@@", "HeightRect"
-						, customizer.factory()->intPropertyConverter(id, "HeightRect"))
+					Binding::createConverting("@@XCoordinateRect@@", "XCoordinateRect"
+							, customizer.factory()->intPropertyConverter(id, "XCoordinateRect"))
+					, Binding::createConverting("@@YCoordinateRect@@", "YCoordinateRect"
+							, customizer.factory()->intPropertyConverter(id, "YCoordinateRect"))
+					, Binding::createConverting("@@WidthRect@@", "WidthRect"
+							, customizer.factory()->intPropertyConverter(id, "WidthRect"))
+					, Binding::createConverting("@@HeightRect@@", "HeightRect"
+							, customizer.factory()->intPropertyConverter(id, "HeightRect"))
+					, Binding::createConverting("@@FilledRect@@", "Filled"
+						   , customizer.factory()->boolPropertyConverter(id, "Filled", false))
 			}
 			, parent)
 {
+	// Calling virtual readTemplate() before base class constructor will cause segfault.
 	addBinding(Binding::createStatic("@@REDRAW@@", repo.property(id, "Redraw").toBool()
 			? readTemplate("drawing/redraw.t") : QString()));
 }

@@ -1,1 +1,0 @@
-RANDOM(@@FROM@@, @@TO@@, @@VARIABLE@@)

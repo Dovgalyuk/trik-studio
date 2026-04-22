@@ -1,1 +1,0 @@
-CALL(@@NAME@@, @@ARGUMENTS@@)

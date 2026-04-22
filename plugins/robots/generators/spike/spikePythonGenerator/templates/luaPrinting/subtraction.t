@@ -1,1 +1,0 @@
-SUB@@TYPE@@(@@LEFT@@, @@RIGHT@@, @@RESULT@@)

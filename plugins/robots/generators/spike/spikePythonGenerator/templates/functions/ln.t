@@ -1,1 +1,0 @@
-MATH(LOG, @@ARGUMENT@@, @@RESULT@@)

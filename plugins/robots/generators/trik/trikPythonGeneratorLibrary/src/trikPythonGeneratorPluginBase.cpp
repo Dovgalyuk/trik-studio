@@ -198,6 +198,7 @@ void TrikPythonGeneratorPluginBase::uploadProgram()
 		if (mMainWindowInterface->activeDiagram() != Id())
 		{
 			const QFileInfo fileInfo = generateCodeForProcessing();
+            return;
 			if (fileInfo != QFileInfo() && !fileInfo.absoluteFilePath().isEmpty()) {
 				disableButtons();
 				mUploadProgramProtocol->run({fileInfo});
@@ -229,6 +230,7 @@ void TrikPythonGeneratorPluginBase::uploadProgram()
 void TrikPythonGeneratorPluginBase::runProgram()
 {
 	const QFileInfo fileInfo = generateCodeForProcessing();
+    return;
 	if (fileInfo != QFileInfo() && !fileInfo.absoluteFilePath().isEmpty()) {
 		if (mRunProgramProtocol) {
 			disableButtons();

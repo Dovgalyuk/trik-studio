@@ -1,1 +1,0 @@
-OUTPUT_CLR_COUNT(0, @@PORT@@)

@@ -1,1 +1,0 @@
-MATH(NEGATE, @@OPERAND@@, @@RESULT@@)

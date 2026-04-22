@@ -1,4 +1,4 @@
-/* Copyright 2015 CyberTech Labs Ltd.
+/* Copyright 2007-2015 QReal Research Group
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,10 @@
 #include "ledGenerator.h"
 
 #include <generatorBase/generatorCustomizer.h>
-
-#include "spikeGeneratorBase/spikeGeneratorFactory.h"
+#include "src/converters/ledColorConverter.h"
 
 using namespace spike::simple;
+using namespace spike::converters;
 using namespace generatorBase::simple;
 
 LedGenerator::LedGenerator(const qrRepo::RepoApi &repo
@@ -26,9 +26,13 @@ LedGenerator::LedGenerator(const qrRepo::RepoApi &repo
 		, const qReal::Id &id
 		, QObject *parent)
 	: BindingGenerator(repo, customizer, id
-			, "led/led.t"
-			, { Binding::createConverting("@@COLOR@@", "Color"
-					, static_cast<SpikeGeneratorFactory *>(customizer.factory())->ledColorConverter()) }
+			, "led.t"
+			, QList<Binding *>()
+					<< Binding::createConverting(
+								"@@COLOR@@"
+								, "Color"
+								, new LedColorConverter(customizer.factory()->pathsToTemplates())
+						)
 			, parent)
 {
 }

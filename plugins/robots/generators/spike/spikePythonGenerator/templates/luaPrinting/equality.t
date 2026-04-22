@@ -1,1 +1,0 @@
-CP_EQ@@TYPE@@(@@LEFT@@, @@RIGHT@@, @@RESULT@@)

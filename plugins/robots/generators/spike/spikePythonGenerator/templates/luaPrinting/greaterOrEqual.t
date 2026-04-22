@@ -1,1 +1,0 @@
-CP_GTEQ@@TYPE@@(@@LEFT@@, @@RIGHT@@, @@RESULT@@)

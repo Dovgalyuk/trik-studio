@@ -19,6 +19,7 @@
 namespace spike {
 namespace simple {
 
+/// Generator for Draw Rect block.
 class DrawRectGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT
@@ -31,4 +32,3 @@ public:
 
 }
 }
-

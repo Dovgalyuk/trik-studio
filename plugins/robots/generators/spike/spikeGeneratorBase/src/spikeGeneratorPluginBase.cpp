@@ -1,4 +1,4 @@
-/* Copyright 2014-2016 QReal Research Group, CyberTech Labs Ltd.
+/* Copyright 2007-2015 QReal Research Group
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,25 +14,14 @@
 
 #include "spikeGeneratorBase/spikeGeneratorPluginBase.h"
 
-#include <qrutils/singleton.h>
-#include <spikeKit/communication/bluetoothRobotCommunicationThread.h>
-#include <spikeKit/communication/usbRobotCommunicationThread.h>
-#include <spikeKit/blocks/spikeBlocksFactory.h>
-
-#include "spikeGeneratorBase/robotModel/spikeGeneratorRobotModel.h"
+#include <qrutils/inFile.h>
 
 using namespace spike;
 
-SpikeGeneratorPluginBase::SpikeGeneratorPluginBase(const QString &usbRobotName, const QString &usbRobotFriendlyName
-		, int usbPriority, const QString &bluetoothRobotName
-		, const QString &bluetoothRobotFriendlyName, int bluetoothPriority)
-	: mUsbRobotModel(new robotModel::SpikeGeneratorRobotModel(kitId(), "spikeUsbGeneratorRobot"
-			, usbRobotName, usbRobotFriendlyName, usbPriority
-			, utils::Singleton<communication::UsbRobotCommunicationThread>::instance()))
-	, mBluetoothRobotModel(new robotModel::SpikeGeneratorRobotModel(kitId(), "spikeBluetoothGeneratorRobot"
-			, bluetoothRobotName, bluetoothRobotFriendlyName, bluetoothPriority
-			, utils::Singleton<communication::BluetoothRobotCommunicationThread>::instance()))
-	, mBlocksFactory(new blocks::SpikeBlocksFactory({}))
+SpikeGeneratorPluginBase::SpikeGeneratorPluginBase(kitBase::robotModel::RobotModelInterface * const robotModel
+		, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory)
+	: mRobotModel(robotModel)
+	, mBlocksFactory(blocksFactory)
 {
 }
 
@@ -40,24 +29,16 @@ SpikeGeneratorPluginBase::~SpikeGeneratorPluginBase()
 {
 }
 
-QString SpikeGeneratorPluginBase::kitId() const
-{
-	return "spikeKit";
-}
-
 QList<kitBase::robotModel::RobotModelInterface *> SpikeGeneratorPluginBase::robotModels()
 {
-	return { mUsbRobotModel.data(), mBluetoothRobotModel.data() };
+	return { mRobotModel.data() };
 }
 
 QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> SpikeGeneratorPluginBase::blocksFactoryFor(
 		const kitBase::robotModel::RobotModelInterface *model)
 {
-	if (robotModels().contains(const_cast<kitBase::robotModel::RobotModelInterface *>(model))) {
-		return mBlocksFactory;
-	} else {
-		return nullptr;
-	}
+	Q_UNUSED(model)
+	return mBlocksFactory;
 }
 
 QList<kitBase::AdditionalPreferences *> SpikeGeneratorPluginBase::settingsWidgets()
@@ -67,14 +48,10 @@ QList<kitBase::AdditionalPreferences *> SpikeGeneratorPluginBase::settingsWidget
 
 void SpikeGeneratorPluginBase::regenerateExtraFiles(const QFileInfo &newFileInfo)
 {
-	Q_UNUSED(newFileInfo)
+	Q_UNUSED(newFileInfo);
 }
 
-QSharedPointer<communication::SpikeRobotCommunicationThread> SpikeGeneratorPluginBase::currentCommunicator()
+kitBase::robotModel::RobotModelInterface &SpikeGeneratorPluginBase::robotModel() const
 {
-	if (auto robotModel = dynamic_cast<robotModel::SpikeGeneratorRobotModel *>(&mRobotModelManager->model())) {
-		return robotModel->communicator();
-	}
-
-	return nullptr;
+	return *mRobotModel.data();
 }

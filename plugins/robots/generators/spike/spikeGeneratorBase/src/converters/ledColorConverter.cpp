@@ -1,4 +1,4 @@
-/* Copyright 2015 CyberTech Labs Ltd.
+/* Copyright 2007-2015 QReal Research Group
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,6 @@
 using namespace spike::converters;
 
 LedColorConverter::LedColorConverter(const QStringList &pathsToTemplates)
-	: DynamicPathConverter(pathsToTemplates, "led/@@DATA@@.t")
+	: DynamicPathConverter(pathsToTemplates, "ledColors/@@DATA@@.t")
 {
 }

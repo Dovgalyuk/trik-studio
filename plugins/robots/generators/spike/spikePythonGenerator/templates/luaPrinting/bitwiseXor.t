@@ -1,1 +1,0 @@
-XOR32(@@LEFT@@, @@RIGHT@@, @@RESULT@@)

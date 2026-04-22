@@ -40,7 +40,7 @@ using namespace kitBase::robotModel;
 
 RealRobotModel::RealRobotModel(const QString &kitId, const QString &robotId
 		, const QSharedPointer<utils::robotCommunication::RobotCommunicationThreadInterface> &communicationThread)
-	: SpikeRobotModelBase(kitId, robotId)
+	: SpikeRobotModel(kitId, robotId)
 	, mRobotCommunicator(new RobotCommunicator(this))
 {
 	connect(mRobotCommunicator, &RobotCommunicator::connected, this, &RealRobotModel::connected);
@@ -135,5 +135,5 @@ robotParts::Device *RealRobotModel::createDevice(const PortInfo &port, const Dev
 		return new parts::Gyroscope(gyroscopeSensorInfo(), port, *mRobotCommunicator);
 	}
 
-	return SpikeRobotModelBase::createDevice(port, deviceInfo);
+	return SpikeRobotModel::createDevice(port, deviceInfo);
 }

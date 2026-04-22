@@ -16,7 +16,7 @@
 
 #include <generatorBase/generatorCustomizer.h>
 
-#include "spikeGeneratorBase/spikeGeneratorFactory.h"
+#include "spikeGeneratorFactory.h"
 
 namespace spike {
 
@@ -27,7 +27,7 @@ public:
 			, qReal::ErrorReporterInterface &errorReporter
 			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
 			, generatorBase::lua::LuaProcessor &luaProcessor
-			, const QString &generatorName
+			, const QStringList &pathsToTemplates
 			, bool supportsSwitchUnstableToBreaks);
 
 	generatorBase::GeneratorFactoryBase *factory() override;

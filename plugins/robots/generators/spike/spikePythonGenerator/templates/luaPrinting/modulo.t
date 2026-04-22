@@ -1,1 +1,0 @@
-MATH(MOD32, @@LEFT@@, @@RIGHT@@, @@RESULT@@)

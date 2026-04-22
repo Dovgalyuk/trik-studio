@@ -1,1 +1,0 @@
-MOVE@@TYPE@@_@@TYPE(0, @@RESULT@@) // Warning: bitwise shifts are not supported directly by SPIKE bytecode!

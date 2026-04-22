@@ -1,1 +1,0 @@
-MATH(ABS, @@ARGUMENT@@, @@RESULT@@)

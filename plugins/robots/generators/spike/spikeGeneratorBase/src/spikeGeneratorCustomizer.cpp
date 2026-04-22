@@ -20,9 +20,9 @@ SpikeGeneratorCustomizer::SpikeGeneratorCustomizer(const qrRepo::RepoApi &repo
 		, qReal::ErrorReporterInterface &errorReporter
 		, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
 		, generatorBase::lua::LuaProcessor &luaProcessor
-		, const QString &generatorName
+		, const QStringList &pathsToTemplates
 		, bool supportsSwitchUnstableToBreaks)
-	: mFactory(repo, errorReporter, robotModelManager, luaProcessor, generatorName)
+	: mFactory(repo, errorReporter, robotModelManager, luaProcessor, pathsToTemplates)
 	, mSupportsSwitchUnstableToBreaks(supportsSwitchUnstableToBreaks)
 {
 }

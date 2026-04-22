@@ -1,1 +1,0 @@
-OR8(@@LEFT@@, @@RIGHT@@, @@RESULT@@)

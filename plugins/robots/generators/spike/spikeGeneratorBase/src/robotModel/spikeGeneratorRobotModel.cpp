@@ -14,25 +14,17 @@
 
 #include "spikeGeneratorBase/robotModel/spikeGeneratorRobotModel.h"
 
-#include <spikeKit/communication/spikeRobotCommunicationThread.h>
-
 using namespace spike::robotModel;
 
 SpikeGeneratorRobotModel::SpikeGeneratorRobotModel(const QString &kitId
 		, const QString &robotId
 		, const QString &name
 		, const QString &friendlyName
-		, int priority
-		, const QSharedPointer<communication::SpikeRobotCommunicationThread> &communicator)
-	: SpikeRobotModelBase(kitId, robotId)
+		, int priority)
+	: SpikeRobotModel(kitId, robotId)
 	, mName(name)
 	, mFriendlyName(friendlyName)
 	, mPriority(priority)
-	, mCommunicator(communicator)
-{
-}
-
-SpikeGeneratorRobotModel::~SpikeGeneratorRobotModel()
 {
 }
 
@@ -61,7 +53,21 @@ int SpikeGeneratorRobotModel::priority() const
 	return mPriority;
 }
 
-QSharedPointer<spike::communication::SpikeRobotCommunicationThread> SpikeGeneratorRobotModel::communicator()
+void SpikeGeneratorRobotModel::addDevice(const kitBase::robotModel::PortInfo &port
+		, kitBase::robotModel::robotParts::Device *device)
 {
-	return mCommunicator;
+	mPreConfiguredDevices[port] = device;
+	configureDevice(port, device->deviceInfo());
+	applyConfiguration();
+}
+
+kitBase::robotModel::robotParts::Device *SpikeGeneratorRobotModel::createDevice(
+		const kitBase::robotModel::PortInfo &port
+		, const kitBase::robotModel::DeviceInfo &deviceInfo)
+{
+	if (mPreConfiguredDevices.contains(port) && mPreConfiguredDevices[port]->deviceInfo().isA(deviceInfo)) {
+		return mPreConfiguredDevices[port];
+	}
+
+	return SpikeRobotModel::createDevice(port, deviceInfo);
 }

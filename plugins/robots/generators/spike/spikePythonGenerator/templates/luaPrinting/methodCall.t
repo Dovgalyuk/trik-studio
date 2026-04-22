@@ -1,1 +1,0 @@
-/* Method calls are not supported in SPIKE bytecode */

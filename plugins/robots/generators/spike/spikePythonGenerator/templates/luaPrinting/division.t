@@ -1,1 +1,0 @@
-DIVF(@@LEFT@@, @@RIGHT@@, @@RESULT@@)

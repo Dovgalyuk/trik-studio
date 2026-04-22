@@ -1,4 +1,4 @@
-/* Copyright 2007-2015 QReal Research Group
+/* Copyright 2016 CyberTech Labs Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,18 @@
 
 #pragma once
 
-#include <utils/robotCommunication/robotCommunicator.h>
-#include <spikeGeneratorBase/spikeGeneratorPluginBase.h>
+#include <spikePythonGeneratorLibrary/spikePythonGeneratorPluginBase.h>
 
 namespace spike {
+
+namespace robotModel {
+class SpikeGeneratorRobotModel;
+}
+
 namespace python {
 
-class SpikePythonGeneratorPlugin : public SpikeGeneratorPluginBase
+/// Javascript generator specialization for SPIKE 6.2 ("new case", with encoders marked as E1 - E4).
+class SpikePythonGeneratorPlugin : public SpikePythonGeneratorPluginBase
 {
 	Q_OBJECT
 	Q_PLUGIN_METADATA(IID "spike.SpikePythonGeneratorPlugin")
@@ -28,46 +33,14 @@ class SpikePythonGeneratorPlugin : public SpikeGeneratorPluginBase
 public:
 	SpikePythonGeneratorPlugin();
 
-	QList<qReal::ActionInfo> customActions() override;
-	QList<qReal::HotKeyActionInfo> hotKeyActions() override;
-	QIcon iconForFastSelector(const kitBase::robotModel::RobotModelInterface &robotModel) const override;
-	int priority() const override;
+	QString kitId() const override;
 
-protected:
-	generatorBase::MasterGeneratorBase *masterGenerator() override;
-	QString defaultFilePath(const QString &projectName) const override;
-	qReal::text::LanguageInfo language() const override;
-	QString generatorName() const override;
-
-private Q_SLOTS:
-	/// Generates and uploads script to a SPIKE robot.
-	/// @return Empty string if operation was unsuccessfull or path to uploaded file on the SPIKE robot otherwise.
-	QString uploadProgram();
-
-	/// Generates and uploads script to a SPIKE robot. Runs uploaded program basing on run policy.
-	void uploadAndRunProgram(spike::SpikeGeneratorPluginBase::RunPolicy runPolicy);
-
-	/// Stops curretly executing program on the SPIKE robot;
-	void stopRobot();
+	void init(const kitBase::KitPluginConfigurator &configurator) override;
 
 private:
-	bool copySystemFiles(const QString &destination);
-	bool compile(const QFileInfo &lmsFile);
-	QString getLmsasmExecutable() const;
-	/// @returns path to uploaded file on SPIKE brick if it was uploaded successfully or empty string otherwise.
-	QString upload(const QFileInfo &lmsFile);
-
-	/// Action that launches code generator
-	QAction *mGenerateCodeAction;  // Doesn't have ownership; may be disposed by GUI.
-
-	/// Action that generates and uploads program on a robot
-	QAction *mUploadProgramAction;  // Doesn't have ownership; may be disposed by GUI.
-
-	/// Action that generates, uploads and starts program on a robot
-	QAction *mRunProgramAction;  // Doesn't have ownership; may be disposed by GUI.
-
-	/// Action that stops current program on a robot
-	QAction *mStopRobotAction;  // Doesn't have ownership; may be disposed by GUI.
+	/// Temporary storage for robot model to be able to correctly initialize it.
+	/// Does not have ownership.
+	robotModel::SpikeGeneratorRobotModel *mModel;
 };
 
 }

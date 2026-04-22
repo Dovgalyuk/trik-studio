@@ -14,29 +14,24 @@
 
 #pragma once
 
-#include <spikeKit/robotModel/spikeRobotModelBase.h>
-#include <QSharedPointer>
+#include <spikeKit/robotModel/spikeRobotModel.h>
+
+#include "generatorModelExtensionInterface.h"
+
 #include "spikeGeneratorBase/spikeGeneratorBaseDeclSpec.h"
 
 namespace spike {
-
-namespace communication {
-class SpikeRobotCommunicationThread;
-}
-
 namespace robotModel {
 
-class ROBOTS_SPIKE_GENERATOR_BASE_EXPORT SpikeGeneratorRobotModel : public SpikeRobotModelBase
+class ROBOTS_SPIKE_GENERATOR_BASE_EXPORT SpikeGeneratorRobotModel
+		: public SpikeRobotModel
+		, public GeneratorModelExtensionInterface
 {
 	Q_OBJECT
 
 public:
-	/// Does not take ownership over \a communicator.
-	/// @param priority A priority of this model over other among their kit.
 	SpikeGeneratorRobotModel(const QString &kitId, const QString &robotId
-			, const QString &name, const QString &friendlyName, int priority
-			, const QSharedPointer<communication::SpikeRobotCommunicationThread> &communicator);
-	~SpikeGeneratorRobotModel();
+			, const QString &name, const QString &friendlyName, int priority);
 
 	QString name() const override;
 	QString friendlyName() const override;
@@ -46,14 +41,17 @@ public:
 
 	int priority() const override;
 
-	/// Returns a pointer to communication thread object of this robot.
-	QSharedPointer<communication::SpikeRobotCommunicationThread> communicator();
+	void addDevice(const kitBase::robotModel::PortInfo &port
+			, kitBase::robotModel::robotParts::Device * const device) override;
 
 private:
+	kitBase::robotModel::robotParts::Device *createDevice(const kitBase::robotModel::PortInfo &port
+			, const kitBase::robotModel::DeviceInfo &deviceInfo) override;
+
 	const QString mName;
 	const QString mFriendlyName;
 	const int mPriority;
-	const QSharedPointer<communication::SpikeRobotCommunicationThread> mCommunicator;
+	QMap<kitBase::robotModel::PortInfo, kitBase::robotModel::robotParts::Device *> mPreConfiguredDevices;
 };
 
 }

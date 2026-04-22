@@ -1,1 +1,0 @@
-MATH(COS, @@ARGUMENT@@, @@RESULT@@)

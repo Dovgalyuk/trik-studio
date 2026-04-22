@@ -14,14 +14,14 @@
 
 #pragma once
 
-#include <spikeKit/robotModel/spikeRobotModelBase.h>
+#include <spikeKit/robotModel/spikeRobotModel.h>
 #include <utils/robotCommunication/robotCommunicator.h>
 
 namespace spike {
 namespace robotModel {
 namespace real {
 
-class RealRobotModel : public SpikeRobotModelBase
+class RealRobotModel : public SpikeRobotModel
 {
 	Q_OBJECT
 

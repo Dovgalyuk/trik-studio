@@ -41,7 +41,7 @@ linux:!autolupdate {
 }
 
 HEADERS += \
-	$$PWD/include/spikeKit/robotModel/spikeRobotModelBase.h \
+	$$PWD/include/spikeKit/robotModel/spikeRobotModel.h \
 	$$PWD/include/spikeKit/robotModel/parts/spikeDisplay.h \
 	$$PWD/include/spikeKit/robotModel/parts/spikeSpeaker.h \
 	$$PWD/include/spikeKit/robotModel/parts/spikeMotor.h \
@@ -53,6 +53,7 @@ HEADERS += \
 	$$PWD/include/spikeKit/robotModel/parts/spikeNXTColorSensorV2RGB.h \
 	$$PWD/include/spikeKit/robotModel/parts/spikeNXTColorSensorV2Passive.h \
 	$$PWD/include/spikeKit/robotModel/parts/spikeNXTColorSensorV2Raw.h \
+	$$PWD/include/spikeKit/robotModel/parts/spikeShell.h \
 	$$PWD/include/spikeKit/blocks/spikeBlocksFactory.h \
 	$$PWD/include/spikeKit/communication/commandConstants.h \
 	$$PWD/include/spikeKit/communication/spikeDirectCommand.h \
@@ -72,7 +73,7 @@ HEADERS += \
 	$$PWD/src/blocks/details/spikeReadRGBBlock.h \
 
 SOURCES += \
-	$$PWD/src/robotModel/spikeRobotModelBase.cpp \
+	$$PWD/src/robotModel/spikeRobotModel.cpp \
 	$$PWD/src/robotModel/parts/spikeDisplay.cpp \
 	$$PWD/src/robotModel/parts/spikeSpeaker.cpp \
 	$$PWD/src/robotModel/parts/spikeMotor.cpp \
@@ -84,6 +85,7 @@ SOURCES += \
 	$$PWD/src/robotModel/parts/spikeNXTColorSensorV2RGB.cpp \
 	$$PWD/src/robotModel/parts/spikeNXTColorSensorV2Passive.cpp \
 	$$PWD/src/robotModel/parts/spikeNXTColorSensorV2Raw.cpp \
+	$$PWD/src/robotModel/parts/spikeShell.cpp \
 	$$PWD/src/blocks/spikeBlocksFactory.cpp \
 	$$PWD/src/blocks/details/speakerBlock.cpp \
 	$$PWD/src/blocks/details/beepBlock.cpp \

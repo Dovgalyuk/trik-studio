@@ -1,1 +1,0 @@
-MATH(POW, @@LEFT@@, @@RIGHT@@, @@RESULT@@)

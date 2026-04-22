@@ -1,1 +1,0 @@
-CP_LTEQ@@TYPE@@(@@LEFT@@, @@RIGHT@@, @@RESULT@@)

@@ -1,1 +1,0 @@
-MATH(FLOOR, @@ARGUMENT@@, @@RESULT@@)

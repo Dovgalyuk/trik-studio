@@ -14,6 +14,8 @@
 
 #pragma once
 
+#include <QtCore/QScopedPointer>
+
 #include <generatorBase/robotsGeneratorPluginBase.h>
 
 #include "spikeGeneratorBase/spikeGeneratorBaseDeclSpec.h"
@@ -24,32 +26,17 @@ namespace robotModel {
 class SpikeGeneratorRobotModel;
 }
 
-namespace blocks {
-class SpikeBlocksFactory;
-}
-
-namespace communication {
-class SpikeRobotCommunicationThread;
-}
-
 /// A base class for every generator from the SPIKE kit.
 class ROBOTS_SPIKE_GENERATOR_BASE_EXPORT SpikeGeneratorPluginBase : public generatorBase::RobotsGeneratorPluginBase
 {
 	Q_OBJECT
 
 public:
-	enum class RunPolicy {
-		Ask
-		, AlwaysRun
-		, NeverRun
-	};
-
-	SpikeGeneratorPluginBase(const QString &usbRobotName, const QString &usbRobotFriendlyName, int usbPriority
-			, const QString &bluetoothRobotName, const QString &bluetoothRobotFriendlyName, int bluetoothPriority);
+	SpikeGeneratorPluginBase(kitBase::robotModel::RobotModelInterface * const robotModel
+			, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory
+			);
 
 	~SpikeGeneratorPluginBase() override;
-
-	QString kitId() const override;
 
 	QList<kitBase::robotModel::RobotModelInterface *> robotModels() override;
 
@@ -60,13 +47,15 @@ public:
 
 protected:
 	void regenerateExtraFiles(const QFileInfo &newFileInfo) override;
-	QSharedPointer<communication::SpikeRobotCommunicationThread> currentCommunicator();
+
+	/// Provides access to robot model to descendant classes.
+	kitBase::robotModel::RobotModelInterface &robotModel() const;
 
 private:
-	QScopedPointer<robotModel::SpikeGeneratorRobotModel> mUsbRobotModel;
-	QScopedPointer<robotModel::SpikeGeneratorRobotModel> mBluetoothRobotModel;
+	/// Robot model that is used to query information about various robot devices.
+	QScopedPointer<kitBase::robotModel::RobotModelInterface> mRobotModel;
+
 	QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> mBlocksFactory;
 };
 
 }
-

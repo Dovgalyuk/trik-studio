@@ -1,1 +1,0 @@
-OBJECT_START(_@@NAME@@)

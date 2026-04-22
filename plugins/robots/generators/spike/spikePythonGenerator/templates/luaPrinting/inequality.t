@@ -1,1 +1,0 @@
-CP_NEQ@@TYPE@@(@@LEFT@@, @@RIGHT@@, @@RESULT@@)

@@ -19,6 +19,7 @@
 namespace spike {
 namespace simple {
 
+/// Generator for Draw Line block.
 class DrawLineGenerator : public generatorBase::simple::BindingGenerator
 {
 	Q_OBJECT

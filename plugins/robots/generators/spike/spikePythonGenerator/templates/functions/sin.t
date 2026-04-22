@@ -1,1 +1,0 @@
-MATH(SIN, @@ARGUMENT@@, @@RESULT@@)

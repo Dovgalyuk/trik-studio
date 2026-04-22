@@ -1,4 +1,4 @@
-/* Copyright 2007-2017 CyberTech Labs Ltd.
+/* Copyright 2007-2015 QReal Research Group
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 namespace spike {
 
-/// Master generator base implementation for every generator from Spike kit
+/// Master generator base implementation for every generator from SPIKE kit
 class ROBOTS_SPIKE_GENERATOR_BASE_EXPORT SpikeMasterGeneratorBase : public generatorBase::MasterGeneratorBase
 {
 	Q_OBJECT
@@ -31,14 +31,13 @@ public:
 			, const kitBase::robotModel::RobotModelManagerInterface &robotModelManager
 			, qrtext::LanguageToolboxInterface &textLanguage
 			, const qReal::Id &diagramId
-			, const QString &generatorName);
+			, const QStringList &pathsToTemplates);
 
 protected:
 	generatorBase::GeneratorCustomizer *createCustomizer() override;
-	void beforeGeneration() override;
-	void processGeneratedCode(QString &code) override;
 
-	const QString mGeneratorName;
+private:
+	const QStringList mPathsToTemplates;
 };
 
 }

@@ -26,6 +26,7 @@ SUBDIRS = \
 	ev3GeneratorBase \
 	ev3RbfGenerator \
 	spikeGeneratorBase \
+	spikePythonGeneratorLibrary \
 	spikePythonGenerator \
 	pioneerLuaGenerator \
 
@@ -40,6 +41,7 @@ ev3GeneratorBase.subdir = $$PWD/ev3/ev3GeneratorBase
 ev3RbfGenerator.subdir = $$PWD/ev3/ev3RbfGenerator
 pioneerLuaGenerator.subdir = $$PWD/pioneer/pioneerLuaGenerator
 spikeGeneratorBase.subdir = $$PWD/spike/spikeGeneratorBase
+spikePythonGeneratorLibrary.subdir = $$PWD/spike/spikePythonGeneratorLibrary
 spikePythonGenerator.subdir = $$PWD/spike/spikePythonGenerator
 
 trikGeneratorBase.depends = generatorBase
@@ -53,7 +55,8 @@ ev3GeneratorBase.depends = generatorBase
 ev3RbfGenerator.depends = ev3GeneratorBase
 pioneerLuaGenerator.depends = generatorBase
 spikeGeneratorBase.depends = generatorBase
-spikePythonGenerator.depends = spikeGeneratorBase
+spikePythonGeneratorLibrary.depends = spikeGeneratorBase
+spikePythonGenerator.depends = spikePythonGeneratorLibrary
 
 CONFIG(trik_retired_features) {
 SUBDIRS += \
