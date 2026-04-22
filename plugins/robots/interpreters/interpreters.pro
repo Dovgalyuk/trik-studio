@@ -23,6 +23,7 @@ SUBDIRS = \
 	ev3KitInterpreter \
 	robotsPlugin \
 	pioneerKitInterpreter \
+	spikeKitInterpreter \
 
 CONFIG(trik_retired_features) {
 	SUBDIRS += trikV6KitInterpreter

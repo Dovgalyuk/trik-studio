@@ -1,0 +1,74 @@
+/* Copyright 2007-2015 QReal Research Group
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. */
+
+#pragma once
+
+#include <utils/robotCommunication/robotCommunicator.h>
+#include <spikeGeneratorBase/spikeGeneratorPluginBase.h>
+
+namespace spike {
+namespace python {
+
+class SpikePythonGeneratorPlugin : public SpikeGeneratorPluginBase
+{
+	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "spike.SpikePythonGeneratorPlugin")
+
+public:
+	SpikePythonGeneratorPlugin();
+
+	QList<qReal::ActionInfo> customActions() override;
+	QList<qReal::HotKeyActionInfo> hotKeyActions() override;
+	QIcon iconForFastSelector(const kitBase::robotModel::RobotModelInterface &robotModel) const override;
+	int priority() const override;
+
+protected:
+	generatorBase::MasterGeneratorBase *masterGenerator() override;
+	QString defaultFilePath(const QString &projectName) const override;
+	qReal::text::LanguageInfo language() const override;
+	QString generatorName() const override;
+
+private Q_SLOTS:
+	/// Generates and uploads script to a SPIKE robot.
+	/// @return Empty string if operation was unsuccessfull or path to uploaded file on the SPIKE robot otherwise.
+	QString uploadProgram();
+
+	/// Generates and uploads script to a SPIKE robot. Runs uploaded program basing on run policy.
+	void uploadAndRunProgram(spike::SpikeGeneratorPluginBase::RunPolicy runPolicy);
+
+	/// Stops curretly executing program on the SPIKE robot;
+	void stopRobot();
+
+private:
+	bool copySystemFiles(const QString &destination);
+	bool compile(const QFileInfo &lmsFile);
+	QString getLmsasmExecutable() const;
+	/// @returns path to uploaded file on SPIKE brick if it was uploaded successfully or empty string otherwise.
+	QString upload(const QFileInfo &lmsFile);
+
+	/// Action that launches code generator
+	QAction *mGenerateCodeAction;  // Doesn't have ownership; may be disposed by GUI.
+
+	/// Action that generates and uploads program on a robot
+	QAction *mUploadProgramAction;  // Doesn't have ownership; may be disposed by GUI.
+
+	/// Action that generates, uploads and starts program on a robot
+	QAction *mRunProgramAction;  // Doesn't have ownership; may be disposed by GUI.
+
+	/// Action that stops current program on a robot
+	QAction *mStopRobotAction;  // Doesn't have ownership; may be disposed by GUI.
+};
+
+}
+}

@@ -1,0 +1,1 @@
+CALL(atan2wrap_SPIKE_KERNEL_util, @@ARGUMENT1@@, @@ARGUMENT2@@, @@RESULT@@)

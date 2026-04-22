@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/spike/python/">
+        <file>images/generatePythonCode.svg</file>
+        <file>images/uploadProgram.svg</file>
+        <file>images/switch-to-spike-python.svg</file>
+	<file>images/run.png</file>
+	<file>images/stop.png</file>
+    </qresource>
+</RCC>

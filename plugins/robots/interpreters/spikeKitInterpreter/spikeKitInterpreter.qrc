@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/spike/interpreter">
+        <file>spikeDefaultSettings.ini</file>
+        <file>images/spike-robot.png</file>
+        <file>images/spike-touch.png</file>
+        <file>images/spike-sonar.png</file>
+        <file>images/spike-brick.png</file>
+        <file>images/spike-up-button.png</file>
+        <file>images/spike-up-button-pressed.png</file>
+        <file>images/spike-down-button.png</file>
+        <file>images/spike-down-button-pressed.png</file>
+        <file>images/spike-left-button.png</file>
+        <file>images/spike-left-button-pressed.png</file>
+        <file>images/spike-right-button.png</file>
+        <file>images/spike-right-button-pressed.png</file>
+        <file>images/spike-enter-button.png</file>
+        <file>images/spike-enter-button-pressed.png</file>
+        <file>images/spike-escape-button.png</file>
+        <file>images/spike-escape-button-pressed.png</file>
+        <file>images/switch-real-spike-usb.svg</file>
+        <file>images/switch-real-spike-bluetooth.svg</file>
+        <file>images/switch-2d.svg</file>
+    </qresource>
+</RCC>

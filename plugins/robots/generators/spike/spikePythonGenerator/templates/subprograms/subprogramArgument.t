@@ -1,0 +1,1 @@
+IN_@@TYPE@@ @@NAME@@

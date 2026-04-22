@@ -1,0 +1,40 @@
+/* Copyright 2019 Cybertech Labs Ltd
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. */
+
+#include "colorSensorAmbient.h"
+
+#include <spikeKit/communication/spikeDirectCommand.h>
+
+const unsigned colorSensorResponseSize = 9;
+
+using namespace spike::robotModel::real::parts;
+using namespace spike::communication;
+using namespace kitBase::robotModel;
+
+ColorSensorAmbient::ColorSensorAmbient(const kitBase::robotModel::DeviceInfo &info
+		, const kitBase::robotModel::PortInfo &port
+		, utils::robotCommunication::RobotCommunicator &robotCommunicator)
+	: kitBase::robotModel::robotParts::ColorSensorAmbient(info, port)
+	, mImplementation(robotCommunicator, port)
+	, mRobotCommunicator(robotCommunicator)
+{
+}
+
+void ColorSensorAmbient::read()
+{
+	const QByteArray command = mImplementation.readyPercentCommand(mImplementation.lowLevelPort(), 1);
+	QByteArray outputBuf;
+	mRobotCommunicator.send(command, colorSensorResponseSize, outputBuf);
+	Q_EMIT newData(static_cast<int>(outputBuf.data()[5]));
+}
