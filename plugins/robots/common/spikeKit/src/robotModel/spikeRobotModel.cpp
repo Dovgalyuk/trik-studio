@@ -61,41 +61,40 @@ SpikeRobotModel::SpikeRobotModel(const QString &kitId, const QString &robotId)
 			, colorAmbientSensorInfo()
 			, colorReflectedSensorInfo()
 			, colorRawSensorInfo()
-			, gyroscopeSensorInfo()
-			, compassSensorInfo()
 			, ACIRSeekerSensorInfo()
 			, DCIRSeekerSensorInfo()
-			, NXTColorSensorV2ColorInfo()
-			, NXTColorSensorV2RGBInfo()
-			, NXTColorSensorV2PassiveInfo()
-			, NXTColorSensorV2RawInfo()
 	};
 
 	addAllowedConnection(PortInfo("DisplayPort", output), { displayInfo() });
 	addAllowedConnection(PortInfo("SpeakerPort", output), { speakerInfo() });
 	addAllowedConnection(PortInfo("LedPort", output), { ledInfo() });
 
-	addAllowedConnection(PortInfo("Up", input, {}, "buttonUp"), { buttonInfo() });
+	addAllowedConnection(PortInfo("GyroscopePort", input), { gyroscopeSensorInfo() });
+
 	addAllowedConnection(PortInfo("Enter", input, {}, "buttonEnter"), { buttonInfo() });
-	addAllowedConnection(PortInfo("Down", input, {}, "buttonDown"), { buttonInfo() });
 	addAllowedConnection(PortInfo("Right", input, {}, "buttonRight"), { buttonInfo() });
 	addAllowedConnection(PortInfo("Left", input, {}, "buttonLeft"), { buttonInfo() });
-	addAllowedConnection(PortInfo("Back", input, {}, "buttonBack"), { buttonInfo() });
 
 	addAllowedConnection(PortInfo("A", output, { QString::fromUtf8("А") }), { motorInfo() });
 	addAllowedConnection(PortInfo("B", output, { QString::fromUtf8("В") }), { motorInfo() });
 	addAllowedConnection(PortInfo("C", output, { QString::fromUtf8("С") }), { motorInfo() });
-	addAllowedConnection(PortInfo("D", output), { motorInfo() });
+	addAllowedConnection(PortInfo("D", output, { QString::fromUtf8("D") }), { motorInfo() });
+	addAllowedConnection(PortInfo("E", output, { QString::fromUtf8("E") }), { motorInfo() });
+	addAllowedConnection(PortInfo("F", output, { QString::fromUtf8("F") }), { motorInfo() });
 
-	addAllowedConnection(PortInfo("A", input, { QString::fromUtf8("А") }, "encoderA"), { encoderInfo() });
-	addAllowedConnection(PortInfo("B", input, { QString::fromUtf8("В") }, "encoderB"), { encoderInfo() });
-	addAllowedConnection(PortInfo("C", input, { QString::fromUtf8("С") }, "encoderC"), { encoderInfo() });
-	addAllowedConnection(PortInfo("D", input, {}, "encoderD"), { encoderInfo() });
+	// addAllowedConnection(PortInfo("A", input, { QString::fromUtf8("А") }, "encoderA"), { encoderInfo() });
+	// addAllowedConnection(PortInfo("B", input, { QString::fromUtf8("В") }, "encoderB"), { encoderInfo() });
+	// addAllowedConnection(PortInfo("C", input, { QString::fromUtf8("С") }, "encoderC"), { encoderInfo() });
+	// addAllowedConnection(PortInfo("D", input, { QString::fromUtf8("D") }, "encoderD"), { encoderInfo() });
+	// addAllowedConnection(PortInfo("E", input, { QString::fromUtf8("E") }, "encoderE"), { encoderInfo() });
+	// addAllowedConnection(PortInfo("F", input, { QString::fromUtf8("F") }, "encoderF"), { encoderInfo() });
 
-	addAllowedConnection(PortInfo("1", input, {}, "sensor1"), inputPortConnections);
-	addAllowedConnection(PortInfo("2", input, {}, "sensor2"), inputPortConnections);
-	addAllowedConnection(PortInfo("3", input, {}, "sensor3"), inputPortConnections);
-	addAllowedConnection(PortInfo("4", input, {}, "sensor4"), inputPortConnections);
+	addAllowedConnection(PortInfo("A", input, {}, "sensorA"), inputPortConnections);
+	addAllowedConnection(PortInfo("B", input, {}, "sensorB"), inputPortConnections);
+	addAllowedConnection(PortInfo("C", input, {}, "sensorC"), inputPortConnections);
+	addAllowedConnection(PortInfo("D", input, {}, "sensorD"), inputPortConnections);
+	addAllowedConnection(PortInfo("E", input, {}, "sensorE"), inputPortConnections);
+	addAllowedConnection(PortInfo("F", input, {}, "sensorF"), inputPortConnections);
 }
 
 QList<DeviceInfo> SpikeRobotModel::convertibleBases() const
@@ -212,11 +211,6 @@ DeviceInfo SpikeRobotModel::gyroscopeSensorInfo() const
 	return DeviceInfo::create<robotParts::GyroscopeSensor>();
 }
 
-DeviceInfo SpikeRobotModel::compassSensorInfo() const
-{
-	return DeviceInfo::create<spike::robotModel::parts::SpikeCompass>();
-}
-
 DeviceInfo SpikeRobotModel::ACIRSeekerSensorInfo() const
 {
 	return DeviceInfo::create<spike::robotModel::parts::SpikeACIRSeeker>();
@@ -225,24 +219,4 @@ DeviceInfo SpikeRobotModel::ACIRSeekerSensorInfo() const
 DeviceInfo SpikeRobotModel::DCIRSeekerSensorInfo() const
 {
 	return DeviceInfo::create<spike::robotModel::parts::SpikeDCIRSeeker>();
-}
-
-DeviceInfo SpikeRobotModel::NXTColorSensorV2ColorInfo() const
-{
-	return DeviceInfo::create<spike::robotModel::parts::SpikeNXTColorSensorV2Color>();
-}
-
-DeviceInfo SpikeRobotModel::NXTColorSensorV2RGBInfo() const
-{
-	return DeviceInfo::create<spike::robotModel::parts::SpikeNXTColorSensorV2RGB>();
-}
-
-DeviceInfo SpikeRobotModel::NXTColorSensorV2PassiveInfo() const
-{
-	return DeviceInfo::create<spike::robotModel::parts::SpikeNXTColorSensorV2Passive>();
-}
-
-DeviceInfo SpikeRobotModel::NXTColorSensorV2RawInfo() const
-{
-	return DeviceInfo::create<spike::robotModel::parts::SpikeNXTColorSensorV2Raw>();
 }

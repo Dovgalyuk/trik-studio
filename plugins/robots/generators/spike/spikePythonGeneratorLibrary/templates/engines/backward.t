@@ -1,1 +1,1 @@
-brick.motor("@@PORT@@").setPower(-(@@POWER@@))
+motor.run(port.@@PORT@@, -@@POWER@@)

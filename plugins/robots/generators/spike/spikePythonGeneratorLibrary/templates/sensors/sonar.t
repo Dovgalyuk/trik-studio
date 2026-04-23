@@ -1,1 +1,1 @@
-brick.sensor("@@PORT@@").read()
+distance_sensor.distance(port.@@PORT@@)

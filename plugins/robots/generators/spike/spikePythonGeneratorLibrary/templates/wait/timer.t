@@ -1,1 +1,1 @@
-script.wait(@@DELAY@@)
+await runloop.sleep_ms(@@DELAY@@)

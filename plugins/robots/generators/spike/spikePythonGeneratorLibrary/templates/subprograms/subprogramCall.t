@@ -1,1 +1,1 @@
-self.@@NAME@@(@@ARGUMENTS@@)
+await self.@@NAME@@(@@ARGUMENTS@@)

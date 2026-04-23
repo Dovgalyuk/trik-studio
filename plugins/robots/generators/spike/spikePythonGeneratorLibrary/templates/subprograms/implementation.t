@@ -1,2 +1,2 @@
-def @@NAME@@(self,@@ARGUMENTS@@):
+async def @@NAME@@(self,@@ARGUMENTS@@):
 @@BODY@@

@@ -2,6 +2,13 @@ import sys
 import time
 import random
 import math
+import motor
+import motor_pair
+import distance_sensor
+import color_sensor
+from hub import port, light_matrix, motion_sensor
+import runloop
+import color
 
 class Program():
   __interpretation_started_timestamp__ = time.time() * 1000
@@ -16,13 +23,13 @@ class Program():
 
   @@THREADS@@
 
-  def execMain(self):
+  async def execMain(self):
 
   @@MAIN_CODE@@
 
-def main():
+async def main():
   program = Program()
-  program.execMain()
+  await program.execMain()
 
 if __name__ == '__main__':
-  main()
+  runloop.run(main())
