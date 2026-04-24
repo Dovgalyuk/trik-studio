@@ -40,17 +40,14 @@ using namespace kitBase::robotModel;
 using namespace qReal;
 using namespace utils::robotCommunication;
 
-SpikePythonGeneratorPluginBase::SpikePythonGeneratorPluginBase(
-		spike::robotModel::SpikeRobotModel * const robotModel
-		, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory
-		, const QStringList &pathsToTemplates)
-	: SpikeGeneratorPluginBase(robotModel, blocksFactory)
+SpikePythonGeneratorPluginBase::SpikePythonGeneratorPluginBase()
+	: SpikeGeneratorPluginBase("SpikePythonUsbGeneratorRobotModel", tr("Python generation (USB)"), 9
+			, "SpikePythonBluetoothGeneratorRobotModel", tr("Python generation (Bluetooth)"), 8)
 	, mGenerateCodeAction(new QAction(this))
 	, mUploadProgramAction(new QAction(this))
 	, mRunProgramAction(new QAction(this))
 	, mStopRobotAction(new QAction(this))
-	, mRobotModel(*robotModel)
-	, mPathsToTemplates(pathsToTemplates)
+	, mPathsToTemplates({":/spikePython/templates"})
 {
 }
 
@@ -62,45 +59,45 @@ void SpikePythonGeneratorPluginBase::init(const kitBase::KitPluginConfigurator &
 {
 	const auto errorReporter = configurer.qRealConfigurator().mainWindowInterpretersInterface().errorReporter();
 	RobotsGeneratorPluginBase::init(configurer);
-	mCommunicator.reset(new TcpRobotCommunicator("SpikeTcpServer"));
-	NetworkCommunicationErrorReporter::connectErrorReporter(*mCommunicator, *errorReporter);
+	// mCommunicator.reset(new TcpRobotCommunicator("SpikeTcpServer"));
+	// NetworkCommunicationErrorReporter::connectErrorReporter(*mCommunicator, *errorReporter);
 
-	mUploadProgramProtocol.reset(new UploadProgramProtocol(*mCommunicator));
-	//mRunProgramProtocol.reset(new RunProgramProtocol(*mCommunicator, mRobotModel.robotConfigFileVersion()));
-	mStopRobotProtocol.reset(new StopRobotProtocol(*mCommunicator));
+	// mUploadProgramProtocol.reset(new UploadProgramProtocol(*mCommunicator));
+	// //mRunProgramProtocol.reset(new RunProgramProtocol(*mCommunicator, mRobotModel.robotConfigFileVersion()));
+	// mStopRobotProtocol.reset(new StopRobotProtocol(*mCommunicator));
 
-	const auto timeout = [this, errorReporter]() {
-		errorReporter->addError(tr("Network operation timed out"));
-		onProtocolFinished();
-	};
+	// const auto timeout = [this, errorReporter]() {
+	// 	errorReporter->addError(tr("Network operation timed out"));
+	// 	onProtocolFinished();
+	// };
 
-	connect(mUploadProgramProtocol.data(), &UploadProgramProtocol::timeout, this, timeout);
-	connect(mRunProgramProtocol.data(), &RunProgramProtocol::timeout, this, timeout);
-	connect(mStopRobotProtocol.data(), &StopRobotProtocol::timeout, this, timeout);
+	// connect(mUploadProgramProtocol.data(), &UploadProgramProtocol::timeout, this, timeout);
+	// connect(mRunProgramProtocol.data(), &RunProgramProtocol::timeout, this, timeout);
+	// connect(mStopRobotProtocol.data(), &StopRobotProtocol::timeout, this, timeout);
 
-	connect(mUploadProgramProtocol.data(), &UploadProgramProtocol::error
-			, this, &SpikePythonGeneratorPluginBase::onProtocolFinished);
-	connect(mRunProgramProtocol.data(), &RunProgramProtocol::error
-			, this, &SpikePythonGeneratorPluginBase::onProtocolFinished);
-	connect(mStopRobotProtocol.data(), &StopRobotProtocol::error
-			, this, &SpikePythonGeneratorPluginBase::onProtocolFinished);
+	// connect(mUploadProgramProtocol.data(), &UploadProgramProtocol::error
+	// 		, this, &SpikePythonGeneratorPluginBase::onProtocolFinished);
+	// connect(mRunProgramProtocol.data(), &RunProgramProtocol::error
+	// 		, this, &SpikePythonGeneratorPluginBase::onProtocolFinished);
+	// connect(mStopRobotProtocol.data(), &StopRobotProtocol::error
+	// 		, this, &SpikePythonGeneratorPluginBase::onProtocolFinished);
 
-	connect(mUploadProgramProtocol.data(), &UploadProgramProtocol::success
-			, this, &SpikePythonGeneratorPluginBase::onProtocolFinished);
-	connect(mRunProgramProtocol.data(), &RunProgramProtocol::success
-			, this, &SpikePythonGeneratorPluginBase::onProtocolFinished);
-	connect(mStopRobotProtocol.data(), &StopRobotProtocol::success
-			, this, &SpikePythonGeneratorPluginBase::onProtocolFinished);
+	// connect(mUploadProgramProtocol.data(), &UploadProgramProtocol::success
+	// 		, this, &SpikePythonGeneratorPluginBase::onProtocolFinished);
+	// connect(mRunProgramProtocol.data(), &RunProgramProtocol::success
+	// 		, this, &SpikePythonGeneratorPluginBase::onProtocolFinished);
+	// connect(mStopRobotProtocol.data(), &StopRobotProtocol::success
+	// 		, this, &SpikePythonGeneratorPluginBase::onProtocolFinished);
 
-	connect(mRunProgramProtocol.data(), &RunProgramProtocol::configVersionMismatch
-			, this, [errorReporter](const QString &expected, const QString &actual) {
-				Q_UNUSED(expected)
-				Q_UNUSED(actual)
-				errorReporter->addError(
-						QString(tr("Casing model mismatch, check SPIKE Studio settings, \"Robots\" page. It seems that "
-								"SPIKE casing version selected in SPIKE Studio differs from version on robot.")));
-			}
-	);
+	// connect(mRunProgramProtocol.data(), &RunProgramProtocol::configVersionMismatch
+	// 		, this, [errorReporter](const QString &expected, const QString &actual) {
+	// 			Q_UNUSED(expected)
+	// 			Q_UNUSED(actual)
+	// 			errorReporter->addError(
+	// 					QString(tr("Casing model mismatch, check SPIKE Studio settings, \"Robots\" page. It seems that "
+	// 							"SPIKE casing version selected in SPIKE Studio differs from version on robot.")));
+	// 		}
+	// );
 }
 
 QList<ActionInfo> SpikePythonGeneratorPluginBase::customActions()

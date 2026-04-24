@@ -33,14 +33,12 @@ class SpikePythonGeneratorPlugin : public SpikePythonGeneratorPluginBase
 public:
 	SpikePythonGeneratorPlugin();
 
-	QString kitId() const override;
-
 	void init(const kitBase::KitPluginConfigurator &configurator) override;
 
 private:
 	/// Temporary storage for robot model to be able to correctly initialize it.
 	/// Does not have ownership.
-	robotModel::SpikeGeneratorRobotModel *mModel;
+	// robotModel::SpikeGeneratorRobotModel *mModel;
 };
 
 }

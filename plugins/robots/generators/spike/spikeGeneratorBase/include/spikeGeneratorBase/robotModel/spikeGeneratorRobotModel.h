@@ -14,13 +14,21 @@
 
 #pragma once
 
+#include <QSharedPointer>
+
 #include <spikeKit/robotModel/spikeRobotModel.h>
 
 #include "generatorModelExtensionInterface.h"
 
 #include "spikeGeneratorBase/spikeGeneratorBaseDeclSpec.h"
+#include <spikeKit/robotModel/spikeRobotModel.h>
 
 namespace spike {
+
+namespace communication {
+class SpikeRobotCommunicationThread;
+}
+
 namespace robotModel {
 
 class ROBOTS_SPIKE_GENERATOR_BASE_EXPORT SpikeGeneratorRobotModel
@@ -31,7 +39,8 @@ class ROBOTS_SPIKE_GENERATOR_BASE_EXPORT SpikeGeneratorRobotModel
 
 public:
 	SpikeGeneratorRobotModel(const QString &kitId, const QString &robotId
-			, const QString &name, const QString &friendlyName, int priority);
+			, const QString &name, const QString &friendlyName, int priority
+            , const QSharedPointer<communication::SpikeRobotCommunicationThread> &communicator);
 
 	QString name() const override;
 	QString friendlyName() const override;
@@ -44,6 +53,7 @@ public:
 	void addDevice(const kitBase::robotModel::PortInfo &port
 			, kitBase::robotModel::robotParts::Device * const device) override;
 
+	QSharedPointer<communication::SpikeRobotCommunicationThread> communicator();
 private:
 	kitBase::robotModel::robotParts::Device *createDevice(const kitBase::robotModel::PortInfo &port
 			, const kitBase::robotModel::DeviceInfo &deviceInfo) override;
@@ -52,6 +62,7 @@ private:
 	const QString mFriendlyName;
 	const int mPriority;
 	QMap<kitBase::robotModel::PortInfo, kitBase::robotModel::robotParts::Device *> mPreConfiguredDevices;
+	const QSharedPointer<communication::SpikeRobotCommunicationThread> mCommunicator;
 };
 
 }

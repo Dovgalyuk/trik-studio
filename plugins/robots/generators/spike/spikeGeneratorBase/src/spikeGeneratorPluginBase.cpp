@@ -14,14 +14,26 @@
 
 #include "spikeGeneratorBase/spikeGeneratorPluginBase.h"
 
+#include <qrutils/singleton.h>
+#include <spikeKit/communication/bluetoothRobotCommunicationThread.h>
+#include <spikeKit/communication/usbRobotCommunicationThread.h>
+#include <spikeKit/blocks/spikeBlocksFactory.h>
+
+#include "spikeGeneratorBase/robotModel/spikeGeneratorRobotModel.h"
+
 #include <qrutils/inFile.h>
 
 using namespace spike;
 
-SpikeGeneratorPluginBase::SpikeGeneratorPluginBase(kitBase::robotModel::RobotModelInterface * const robotModel
-		, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory)
-	: mRobotModel(robotModel)
-	, mBlocksFactory(blocksFactory)
+SpikeGeneratorPluginBase::SpikeGeneratorPluginBase(const QString &usbRobotName, const QString &usbRobotFriendlyName, int usbPriority
+			, const QString &bluetoothRobotName, const QString &bluetoothRobotFriendlyName, int bluetoothPriority)
+	: mUsbRobotModel(new robotModel::SpikeGeneratorRobotModel(kitId(), "spikeUsbGeneratorRobot"
+			, usbRobotName, usbRobotFriendlyName, usbPriority
+			, utils::Singleton<communication::UsbRobotCommunicationThread>::instance()))
+	, mBluetoothRobotModel(new robotModel::SpikeGeneratorRobotModel(kitId(), "spikeBluetoothGeneratorRobot"
+			, bluetoothRobotName, bluetoothRobotFriendlyName, bluetoothPriority
+			, utils::Singleton<communication::BluetoothRobotCommunicationThread>::instance()))
+	, mBlocksFactory(new blocks::SpikeBlocksFactory({}))
 {
 }
 
@@ -29,16 +41,24 @@ SpikeGeneratorPluginBase::~SpikeGeneratorPluginBase()
 {
 }
 
+QString SpikeGeneratorPluginBase::kitId() const
+{
+	return "spikeKit";
+}
+
 QList<kitBase::robotModel::RobotModelInterface *> SpikeGeneratorPluginBase::robotModels()
 {
-	return { mRobotModel.data() };
+	return { mUsbRobotModel.data(), mBluetoothRobotModel.data() };
 }
 
 QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> SpikeGeneratorPluginBase::blocksFactoryFor(
 		const kitBase::robotModel::RobotModelInterface *model)
 {
-	Q_UNUSED(model)
-	return mBlocksFactory;
+	if (robotModels().contains(const_cast<kitBase::robotModel::RobotModelInterface *>(model))) {
+		return mBlocksFactory;
+	} else {
+		return nullptr;
+	}
 }
 
 QList<kitBase::AdditionalPreferences *> SpikeGeneratorPluginBase::settingsWidgets()
@@ -51,7 +71,11 @@ void SpikeGeneratorPluginBase::regenerateExtraFiles(const QFileInfo &newFileInfo
 	Q_UNUSED(newFileInfo);
 }
 
-kitBase::robotModel::RobotModelInterface &SpikeGeneratorPluginBase::robotModel() const
+QSharedPointer<communication::SpikeRobotCommunicationThread> SpikeGeneratorPluginBase::currentCommunicator()
 {
-	return *mRobotModel.data();
+	if (auto robotModel = dynamic_cast<robotModel::SpikeGeneratorRobotModel *>(&mRobotModelManager->model())) {
+		return robotModel->communicator();
+	}
+
+	return nullptr;
 }

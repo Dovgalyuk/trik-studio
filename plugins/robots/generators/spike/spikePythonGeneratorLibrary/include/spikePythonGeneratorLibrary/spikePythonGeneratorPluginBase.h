@@ -49,9 +49,7 @@ class SpikePythonGeneratorPluginBase : public SpikeGeneratorPluginBase
 	Q_OBJECT
 
 public:
-	SpikePythonGeneratorPluginBase(spike::robotModel::SpikeRobotModel * const robotModel
-			, const QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface> &blocksFactory
-			, const QStringList &pathsToTemplates);
+	SpikePythonGeneratorPluginBase();
 
 	~SpikePythonGeneratorPluginBase() override;
 
@@ -102,9 +100,6 @@ private:
 
 	/// Communicator object used to send commands to robot.
 	QScopedPointer<utils::robotCommunication::TcpRobotCommunicator> mCommunicator;
-
-	/// Robot model that is used by generator to check config file version on a robot.
-	spike::robotModel::SpikeRobotModel &mRobotModel;
 
 	QStringList mPathsToTemplates;
 

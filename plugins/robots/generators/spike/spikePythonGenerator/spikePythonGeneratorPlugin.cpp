@@ -22,25 +22,13 @@ using namespace spike::python;
 using namespace kitBase::robotModel;
 
 SpikePythonGeneratorPlugin::SpikePythonGeneratorPlugin()
-	: SpikePythonGeneratorPluginBase(new robotModel::SpikeGeneratorRobotModel(
-					"spikeKit"
-					, "spikeKitRobot"
-					, "SpikePythonGeneratorRobotModel"
-					, tr("Generation (Python)")
-					, 7 /* After PascalABC model */)
-			, QSharedPointer<kitBase::blocksBase::BlocksFactoryInterface>(new blocks::SpikeBlocksFactory({}))
-			, {":/spikePython/templates"})
-	, mModel(static_cast<robotModel::SpikeGeneratorRobotModel *>(robotModels().first()))
+	: SpikePythonGeneratorPluginBase()
+	// , mModel(static_cast<robotModel::SpikeGeneratorRobotModel *>(robotModels().first()))
 {
-}
-
-QString SpikePythonGeneratorPlugin::kitId() const
-{
-	return "spikeKit";
 }
 
 void SpikePythonGeneratorPlugin::init(const kitBase::KitPluginConfigurator &configurator)
 {
 	SpikePythonGeneratorPluginBase::init(configurator);
-	addShellDevice(*mModel);
+	// addShellDevice(*mModel);
 }

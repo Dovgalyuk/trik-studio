@@ -13,6 +13,7 @@
  * limitations under the License. */
 
 #include "spikeGeneratorBase/robotModel/spikeGeneratorRobotModel.h"
+#include <spikeKit/communication/spikeRobotCommunicationThread.h>
 
 using namespace spike::robotModel;
 
@@ -20,11 +21,13 @@ SpikeGeneratorRobotModel::SpikeGeneratorRobotModel(const QString &kitId
 		, const QString &robotId
 		, const QString &name
 		, const QString &friendlyName
-		, int priority)
+		, int priority
+		, const QSharedPointer<communication::SpikeRobotCommunicationThread> &communicator)
 	: SpikeRobotModel(kitId, robotId)
 	, mName(name)
 	, mFriendlyName(friendlyName)
 	, mPriority(priority)
+	, mCommunicator(communicator)
 {
 }
 
@@ -51,6 +54,11 @@ bool SpikeGeneratorRobotModel::interpretedModel() const
 int SpikeGeneratorRobotModel::priority() const
 {
 	return mPriority;
+}
+
+QSharedPointer<spike::communication::SpikeRobotCommunicationThread> SpikeGeneratorRobotModel::communicator()
+{
+	return mCommunicator;
 }
 
 void SpikeGeneratorRobotModel::addDevice(const kitBase::robotModel::PortInfo &port
