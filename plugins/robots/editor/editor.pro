@@ -24,14 +24,17 @@ SUBDIRS = \
 	ev3 \
 	trik \
 	pioneer \
+	spike \
 
 common.file = $$PWD/common/robotsMetamodel.pro
 nxt.file = $$PWD/nxt/nxtMetamodel.pro
 ev3.file = $$PWD/ev3/ev3Metamodel.pro
 trik.file = $$PWD/trik/trikMetamodel.pro
 pioneer.file = $$PWD/pioneer/pioneerMetamodel.pro
+spike.file = $$PWD/spike/spikeMetamodel.pro
 
 nxt.depends = common
 ev3.depends = common
 trik.depends = common
 pioneer.depends = common
+spike.depends = common

@@ -1,0 +1,38 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+	<file>generated/shapes/SpikeBeepClass.sdf</file>
+	<file>generated/shapes/SpikeCalibrateBlackLLClass.sdf</file>
+	<file>generated/shapes/SpikeCalibrateGyroscopeClass.sdf</file>
+	<file>generated/shapes/SpikeCalibratePIDLLClass.sdf</file>
+	<file>generated/shapes/SpikeCalibrateWhiteLLClass.sdf</file>
+	<file>generated/shapes/SpikeClearEncoderClass.sdf</file>
+	<file>generated/shapes/SpikeDrawCircleClass.sdf</file>
+	<file>generated/shapes/SpikeDrawLineClass.sdf</file>
+	<file>generated/shapes/SpikeDrawPixelClass.sdf</file>
+	<file>generated/shapes/SpikeDrawRectClass.sdf</file>
+	<file>generated/shapes/SpikeEnginesBackwardClass.sdf</file>
+	<file>generated/shapes/SpikeEnginesForwardClass.sdf</file>
+	<file>generated/shapes/SpikeEnginesStopClass.sdf</file>
+	<file>generated/shapes/SpikeLedClass.sdf</file>
+	<file>generated/shapes/SpikePlayToneClass.sdf</file>
+	<file>generated/shapes/SpikeReadAllLLClass.sdf</file>
+	<file>generated/shapes/SpikeReadAvrLLClass.sdf</file>
+	<file>generated/shapes/SpikeReadRGBClass.sdf</file>
+	<file>generated/shapes/SpikeReadSteeringLLClass.sdf</file>
+	<file>generated/shapes/SpikeSendMailClass.sdf</file>
+	<file>generated/shapes/SpikeSleepLLClass.sdf</file>
+	<file>generated/shapes/SpikeStartCompassCalibrationClass.sdf</file>
+	<file>generated/shapes/SpikeStopCompassCalibrationClass.sdf</file>
+	<file>generated/shapes/SpikeWaitForButtonClass.sdf</file>
+	<file>generated/shapes/SpikeWaitForColorClass.sdf</file>
+	<file>generated/shapes/SpikeWaitForColorIntensityClass.sdf</file>
+	<file>generated/shapes/SpikeWaitForEncoderClass.sdf</file>
+	<file>generated/shapes/SpikeWaitForGyroscopeClass.sdf</file>
+	<file>generated/shapes/SpikeWaitForLightClass.sdf</file>
+	<file>generated/shapes/SpikeWaitForReceivingMailClass.sdf</file>
+	<file>generated/shapes/SpikeWaitForSonarDistanceClass.sdf</file>
+	<file>generated/shapes/SpikeWaitForSoundClass.sdf</file>
+	<file>generated/shapes/SpikeWaitForTouchSensorClass.sdf</file>
+	<file>generated/shapes/SpikeWakeUpLLClass.sdf</file>
+</qresource>
+</RCC>

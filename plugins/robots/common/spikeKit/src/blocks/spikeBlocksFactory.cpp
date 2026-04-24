@@ -179,9 +179,6 @@ qReal::IdList SpikeBlocksFactory::blocksToDisable() const
 			result
 					<< id("SpikeCalibrateGyroscope")
 					;
-		} else {
-			result << id("SwitchBlock")
-					;
 		}
 	}
 
