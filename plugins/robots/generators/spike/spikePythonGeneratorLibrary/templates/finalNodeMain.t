@@ -1,3 +1,2 @@
-TODO
-brick.stop()
+motor.stop()
 return

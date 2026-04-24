@@ -64,7 +64,7 @@
 							<default>brake</default>
 						</property>-->
 						<property displayedName="Ports" type="string" name="Ports" >
-							<default>B, C</default>
+							<default>A, B</default>
 						</property>
 					</properties>
 					<generalizations>
@@ -146,7 +146,7 @@
 							<default>brake</default>
 						</property>
 						<property displayedName="Ports" type="string" name="Ports">
-							<default>A, B, C, D</default>
+							<default>A, B, C, D, E, F</default>
 						</property>
 					</properties>
 				</logic>
@@ -225,7 +225,7 @@
 					<container/>
 					<properties>
 						<property displayedName="Ports" type="string" name="Ports">
-							<default>A, B, C, D</default>
+							<default>A, B, C, D, E, F</default>
 						</property>
 					</properties>
 					<generalizations>
@@ -570,7 +570,7 @@
 					<container/>
 					<properties>
 						<property displayedName="Port" type="SpikeSensorPort" name="Port">
-							<default>1</default>
+							<default>C</default>
 						</property>
 					</properties>
 					<generalizations>
@@ -689,7 +689,7 @@
 					</picture>
 					<labels>
 						<label x="40" y="-35" textBinded="Port" hard="true" background="white" prefix="Port:"/>
-						<label x="50" y="60" textBinded="Distance" background="white" prefix="Distance:" suffix="cm"/>
+						<label x="50" y="60" textBinded="Distance" background="white" prefix="Distance:" suffix="mm"/>
 						<label x="55" y="90" textBinded="Sign" background="white" prefix="Sign:"/>
 					</labels>
 					<nonResizeable/>
@@ -742,7 +742,7 @@
 					<container/>
 					<properties>
 						<property displayedName="Port" type="SpikeMotorPort" name="Port">
-							<default>B</default>
+							<default>A</default>
 						</property>
 						<property displayedName="Tacho Limit" type="string" name="TachoLimit"/>
 						<property displayedName="Sign" type="DistanceSign" name="Sign">
@@ -795,7 +795,7 @@
 				<container/>
 				<properties>
 					<property displayedName="Button" type="SpikeButtons" name="Button">
-						<default>Up</default>
+						<default>Left</default>
 					</property>
 				</properties>
 				<generalizations>
@@ -820,10 +820,10 @@
 					<container/>
 					<properties>
 						<property displayedName="X" type="int" name="XCoordinatePix">
-							<default>90</default>
+							<default>1</default>
 						</property>
 						<property displayedName="Y" type="int" name="YCoordinatePix">
-							<default>70</default>
+							<default>1</default>
 						</property>
 						<property displayedName="Redraw" type="bool" name="Redraw">
 							<default>true</default>
@@ -851,16 +851,16 @@
 				<container/>
 				<properties>
 					<property displayedName="X1" type="int" name="X1CoordinateLine">
-						<default>20</default>
+						<default>1</default>
 					</property>
 					<property displayedName="Y1" type="int" name="Y1CoordinateLine">
-						<default>90</default>
+						<default>1</default>
 					</property>
 					<property displayedName="X2" type="int" name="X2CoordinateLine">
-						 <default>150</default>
+						 <default>5</default>
 					</property>
 					<property displayedName="Y2" type="int" name="Y2CoordinateLine">
-						<default>20</default>
+						<default>5</default>
 					</property>
 					<property displayedName="Redraw" type="bool" name="Redraw">
 						<default>true</default>
@@ -889,16 +889,16 @@
 					<container/>
 					<properties>
 						<property displayedName="X" type="int" name="XCoordinateRect">
-							<default>75</default>
+							<default>1</default>
 						</property>
 						<property displayedName="Y" type="int" name="YCoordinateRect">
-							<default>50</default>
+							<default>1</default>
 						</property>
 						<property displayedName="Width" type="int" name="WidthRect">
-							<default>40</default>
+							<default>3</default>
 						</property>
 						<property displayedName="Height" type="int" name="HeightRect">
-							<default>30</default>
+							<default>3</default>
 						</property>
 						<property displayedName="Filled" type="bool" name="Filled">
 							<default>false</default>
@@ -929,13 +929,13 @@
 				<container/>
 				<properties>
 						<property displayedName="X" type="int" name="XCoordinateCircle">
-							<default>85</default>
+							<default>3</default>
 						</property>
 						<property displayedName="Y" type="int" name="YCoordinateCircle">
-							<default>70</default>
+							<default>3</default>
 						</property>
 						<property displayedName="Radius" type="int" name="CircleRadius">
-							<default>40</default>
+							<default>2</default>
 						</property>
 						<property displayedName="Filled" type="bool" name="Filled">
 							<default>false</default>

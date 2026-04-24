@@ -91,12 +91,12 @@ QString TwoDRobotModel::robotImage() const
 
 PortInfo TwoDRobotModel::defaultLeftWheelPort() const
 {
-	return PortInfo("B", output);
+	return PortInfo("A", output);
 }
 
 PortInfo TwoDRobotModel::defaultRightWheelPort() const
 {
-	return PortInfo("C", output);
+	return PortInfo("B", output);
 }
 
 twoDModel::engine::TwoDModelDisplayWidget *TwoDRobotModel::displayWidget() const

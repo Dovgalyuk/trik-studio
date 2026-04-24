@@ -1,2 +1,1 @@
-TODO
-brick.sensor("@@PORT@@").read()
+color_sensor.reflection(port.@@PORT@@)

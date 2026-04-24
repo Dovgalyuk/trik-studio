@@ -27,8 +27,6 @@
 #include "simpleGenerators/drawArcGenerator.h"
 #include "simpleGenerators/initCameraGenerator.h"
 #include "simpleGenerators/stopCameraGenerator.h"
-#include "simpleGenerators/initVideoStreamingGenerator.h"
-#include "simpleGenerators/stopVideoStreamingGenerator.h"
 #include "simpleGenerators/ledGenerator.h"
 #include "simpleGenerators/playToneGenerator.h"
 #include "simpleGenerators/waitForMessageGenerator.h"
@@ -44,10 +42,6 @@
 #include "simpleGenerators/spikeEnginesGenerator.h"
 #include "simpleGenerators/waitForInfraredSensorGenerator.h"
 #include "simpleGenerators/waitForMotionGenerator.h"
-#include "simpleGenerators/waitGamepadButtonGenerator.h"
-#include "simpleGenerators/waitGamepadConnectGenerator.h"
-#include "simpleGenerators/waitGamepadDisconnectGenerator.h"
-#include "simpleGenerators/waitGamepadWheelGenerator.h"
 #include "simpleGenerators/waitPadPressGenerator.h"
 #include "simpleGenerators/fileWriteGenerator.h"
 #include "simpleGenerators/removeFileGenerator.h"
@@ -135,24 +129,12 @@ AbstractSimpleGenerator *SpikeGeneratorFactory::simpleGenerator(const qReal::Id 
 		return new StopCameraGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "SpikeDetectorToVariable") {
 		return new DetectorToVariableGenerator(mRepo, customizer, id, this);
-	} else if (elementType == "SpikeInitVideoStreaming") {
-		return new InitVideoStreamingGenerator(mRepo, customizer, id, this);
-	} else if (elementType == "SpikeStopVideoStreaming") {
-		return new StopVideoStreamingGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "SpikeWaitForMotion") {
 		return new WaitForMotionGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "SpikeWaitForIRDistance") {
 		return new WaitForInfraredSensorGenerator(mRepo, customizer, id, this);
-	} else if (elementType == "SpikeWaitGamepadButton") {
-		return new WaitGamepadButtonGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "SpikeWaitPadPress") {
 		return new WaitPadPressGenerator(mRepo, customizer, id, this);
-	} else if (elementType == "SpikeWaitGamepadWheel") {
-		return new WaitGamepadWheelGenerator(mRepo, customizer, id, this);
-	} else if (elementType == "SpikeWaitGamepadConnect") {
-		return new WaitGamepadConnectGenerator(mRepo, customizer, id, this);
-	} else if (elementType == "SpikeWaitGamepadDisconnect") {
-		return new WaitGamepadDisconnectGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "SpikeWriteToFile") {
 		return new FileWriteGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "SpikeRemoveFile") {
@@ -161,8 +143,6 @@ AbstractSimpleGenerator *SpikeGeneratorFactory::simpleGenerator(const qReal::Id 
 		return new MarkerDownGenerator(mRepo, customizer, id, this);
 	} else if (elementType == "MarkerUp") {
 		return new MarkerUpGenerator(mRepo, customizer, id, this);
-	} else if (elementType == "SpikeReadLidar") {
-		return new ReadLidarGenerator(mRepo, customizer, id, this);
 	}
 
 	return GeneratorFactoryBase::simpleGenerator(id, customizer);

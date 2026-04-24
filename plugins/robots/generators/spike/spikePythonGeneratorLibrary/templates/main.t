@@ -6,6 +6,7 @@ import motor
 import motor_pair
 import distance_sensor
 import color_sensor
+import force_sensor
 from hub import port, light_matrix, motion_sensor
 import runloop
 import color

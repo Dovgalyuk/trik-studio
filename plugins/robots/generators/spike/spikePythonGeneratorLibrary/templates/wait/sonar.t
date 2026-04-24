@@ -1,3 +1,1 @@
-TODO
-while not (brick.sensor("@@PORT@@").read() @@SIGN@@ @@DISTANCE@@):
-  script.wait(10)
+await runloop.until(lambda: -1 < distance_sensor.distance(port.A) @@SIGN@@ @@DISTANCE@@))

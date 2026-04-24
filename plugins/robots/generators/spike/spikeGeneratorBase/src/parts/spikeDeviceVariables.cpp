@@ -30,8 +30,6 @@ QString SpikeDeviceVariables::variableTemplatePath(const kitBase::robotModel::De
 		return "videosensors/" + templateName + ".t";
 	} else if (device.name() == "gyroscope" || device.name() == "accelerometer") {
 		return QString("%1/%2.t").arg(device.name(), port.reservedVariable());
-	} else if (device.name().startsWith("gamepad")) {
-		return QString("gamepad/%1.t").arg(device.name());
 	}
 
 	return generatorBase::parts::DeviceVariables::variableTemplatePath(device, port);

@@ -14,9 +14,8 @@
 
 #include "twoDDisplay.h"
 
-const int textSize = 20;
-const int spikeDisplayHeight = 128;
-const int spikeDisplayWidth = 178;
+const int spikeDisplayHeight = 5;
+const int spikeDisplayWidth = 5;
 
 using namespace spike::robotModel::twoD::parts;
 using namespace kitBase::robotModel;
@@ -75,12 +74,9 @@ void Display::paint(QPainter *painter, const QRect &outputRect)
 			, static_cast<qreal>(mEngine.display()->displayHeight()) / spikeDisplayHeight);
 
 	QPen pen;
-	QFont font;
-	font.setPixelSize(textSize);
 
 	painter->setPen(pen);
 	painter->setBrush(QBrush(Qt::black, Qt::NoBrush));
-	painter->setFont(font);
 	painter->setRenderHint(QPainter::HighQualityAntialiasing);
 
 	Canvas::paint(painter, {0, 0, mEngine.display()->displayWidth(), mEngine.display()->displayHeight()});

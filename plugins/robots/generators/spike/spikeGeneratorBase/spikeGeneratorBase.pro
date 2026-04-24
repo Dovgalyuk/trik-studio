@@ -49,7 +49,6 @@ HEADERS += \
 	$$PWD/src/simpleGenerators/initCameraGenerator.h \
 	$$PWD/src/simpleGenerators/ledGenerator.h \
 	$$PWD/src/simpleGenerators/detectorToVariableGenerator.h \
-	$$PWD/src/simpleGenerators/initVideoStreamingGenerator.h \
 	$$PWD/src/simpleGenerators/playToneGenerator.h \
 	$$PWD/src/simpleGenerators/sadSmileGenerator.h \
 	$$PWD/src/simpleGenerators/sayGenerator.h \
@@ -68,15 +67,10 @@ HEADERS += \
 	$$PWD/src/simpleGenerators/setPainterColorGenerator.h \
 	$$PWD/src/simpleGenerators/sendMessageGenerator.h \
 	$$PWD/src/simpleGenerators/waitForMessageGenerator.h \
-	$$PWD/src/simpleGenerators/waitGamepadButtonGenerator.h \
-	$$PWD/src/simpleGenerators/waitGamepadConnectGenerator.h \
-	$$PWD/src/simpleGenerators/waitGamepadDisconnectGenerator.h \
-	$$PWD/src/simpleGenerators/waitGamepadWheelGenerator.h \
 	$$PWD/src/simpleGenerators/waitPadPressGenerator.h \
 	$$PWD/src/simpleGenerators/fileWriteGenerator.h \
 	$$PWD/src/simpleGenerators/removeFileGenerator.h \
 	$$PWD/src/simpleGenerators/stopCameraGenerator.h \
-	$$PWD/src/simpleGenerators/stopVideoStreamingGenerator.h \
 	$$PWD/src/simpleGenerators/markerDownGenerator.h \
 	$$PWD/src/simpleGenerators/markerUpGenerator.h \
 	$$PWD/src/simpleGenerators/printTextGenerator.h \
@@ -97,7 +91,6 @@ SOURCES += \
 	$$PWD/src/simpleGenerators/initCameraGenerator.cpp \
 	$$PWD/src/simpleGenerators/ledGenerator.cpp \
 	$$PWD/src/simpleGenerators/detectorToVariableGenerator.cpp \
-	$$PWD/src/simpleGenerators/initVideoStreamingGenerator.cpp \
 	$$PWD/src/simpleGenerators/playToneGenerator.cpp \
 	$$PWD/src/simpleGenerators/sadSmileGenerator.cpp \
 	$$PWD/src/simpleGenerators/sayGenerator.cpp \
@@ -116,15 +109,10 @@ SOURCES += \
 	$$PWD/src/simpleGenerators/setPainterColorGenerator.cpp \
 	$$PWD/src/simpleGenerators/sendMessageGenerator.cpp \
 	$$PWD/src/simpleGenerators/waitForMessageGenerator.cpp \
-	$$PWD/src/simpleGenerators/waitGamepadButtonGenerator.cpp \
-	$$PWD/src/simpleGenerators/waitGamepadConnectGenerator.cpp \
-	$$PWD/src/simpleGenerators/waitGamepadDisconnectGenerator.cpp \
-	$$PWD/src/simpleGenerators/waitGamepadWheelGenerator.cpp \
 	$$PWD/src/simpleGenerators/waitPadPressGenerator.cpp \
 	$$PWD/src/simpleGenerators/fileWriteGenerator.cpp \
 	$$PWD/src/simpleGenerators/removeFileGenerator.cpp \
 	$$PWD/src/simpleGenerators/stopCameraGenerator.cpp \
-	$$PWD/src/simpleGenerators/stopVideoStreamingGenerator.cpp \
 	$$PWD/src/simpleGenerators/markerDownGenerator.cpp \
 	$$PWD/src/simpleGenerators/markerUpGenerator.cpp \
 	$$PWD/src/simpleGenerators/printTextGenerator.cpp \

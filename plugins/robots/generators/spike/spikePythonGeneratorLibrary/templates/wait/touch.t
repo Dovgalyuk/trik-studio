@@ -1,3 +1,1 @@
-TODO
-while brick.sensor("@@PORT@@").read() <= 0:
-  script.wait(10)
+await runloop.until(lambda: force_sensor.pressed(Port.@@PORT@@))

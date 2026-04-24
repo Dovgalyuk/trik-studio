@@ -1,2 +1,1 @@
-TODO
-brick.motor("@@PORT@@").@@BREAK_MODE@@()
+motor.stop(port.@@PORT@@, @@BREAK_MODE@@)
