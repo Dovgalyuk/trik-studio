@@ -1,2 +1,1 @@
-TODO
-Threading.startThread("@@THREAD_ID@@", "TASK_@@NAME@@")
+THREAD_@@THREAD_ID@@ = TASK_@@NAME@@()

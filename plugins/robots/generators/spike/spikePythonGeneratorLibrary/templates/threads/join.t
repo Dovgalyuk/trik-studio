@@ -1,2 +1,1 @@
-TODO
-Threading.joinThread("@@THREAD_ID@@")
+await runloop.run(THREAD_@@THREAD_ID@@)

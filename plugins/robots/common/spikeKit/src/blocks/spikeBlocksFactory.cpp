@@ -164,7 +164,7 @@ qReal::IdList SpikeBlocksFactory::blocksToDisable() const
 				;
 	} else {
 		if (!mInterpretedModels.contains(mRobotModelManager->model().robotId())) {
-			result << id("Join") << id("SendMessageThreads") << id("ReceiveMessageThreads") << id("KillThread");
+			result << id("SendMessageThreads") << id("ReceiveMessageThreads") << id("KillThread");
 		}
 		if (!mRobotModelManager->model().name().contains("Gen")) {
 			result

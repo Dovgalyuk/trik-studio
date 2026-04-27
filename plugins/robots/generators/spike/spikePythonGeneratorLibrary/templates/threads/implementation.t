@@ -1,5 +1,2 @@
-TODO
-TASK_@@NAME@@ = function()
-{
+async def TASK_@@NAME@@():
 @@BODY@@
-}
